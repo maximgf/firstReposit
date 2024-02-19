@@ -1,7 +1,7 @@
 import uuid
 from abc import ABC
-from .src.error_proxy import error_proxy
-from Utils.typecheck import typecheck
+from src.argument_exception import argument_exception
+from src.error_proxy import error_proxy
 
 
 class abstract_referance(ABC):
@@ -21,8 +21,12 @@ class abstract_referance(ABC):
 
 
     @name.setter
-    @typecheck(expression = lambda x: len(x['value']) < 50)
     def name(self, value: str):
+        if not isinstance(value, str):
+            raise argument_exception("Неверный аргумент!")
+
+        if not (len(value) >= 1 and len(value) <= 50):
+            raise argument_exception("Несоответствующая длина аргумента")
         self.__name = value.strip()
 
 

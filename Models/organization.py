@@ -1,6 +1,6 @@
-from abstract_references import abstract_referance
-from Src.settings import Settings
-from Utils.typecheck import typecheck
+from Models.abstract_references import abstract_referance
+from src.settings import settings
+
 
 
 class organization_model(abstract_referance):
@@ -10,8 +10,7 @@ class organization_model(abstract_referance):
     __form:str = ''
 
 
-    @typecheck
-    def __init__(self, settings: Settings, *args, **kwargs):
+    def __init__(self, settings: settings, *args, **kwargs):
         '''
         _INN, _BIK, _account, _type - you can get, but don't set.
         '''
