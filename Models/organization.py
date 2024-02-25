@@ -1,16 +1,15 @@
-from Models.abstract_references import abstract_referance
-from src.settings import settings
-
+from Src.Models.abstract_references import abstract_referance
+from Src.settings import Settings
 
 
 class organization_model(abstract_referance):
     __INN:str = ''
     __BIK:str = ''
-    __exspense:str = ''
-    __form:str = ''
+    __account:str = ''
+    __type:str = ''
 
 
-    def __init__(self, settings: settings, *args, **kwargs):
+    def __init__(self, settings: Settings, *args, **kwargs):
         '''
         _INN, _BIK, _account, _type - you can get, but don't set.
         '''
@@ -31,10 +30,10 @@ class organization_model(abstract_referance):
 
 
     @property
-    def exspense(self):
+    def account(self):
         return self._account
 
 
     @property
-    def form(self):
+    def type(self):
         return self._type
