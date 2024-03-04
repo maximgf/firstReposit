@@ -13,6 +13,9 @@ class abstract_referance(ABC):
         self.name = name
         self.__id = uuid.uuid4()
 
+    def __str__(self):
+        return str(self.id)
+
     @property
     def name(self):
         return self.__name.strip()
@@ -21,7 +24,10 @@ class abstract_referance(ABC):
     def name(self, value: str):
         self.__name = value.strip()
 
-
     @property
     def error(self):
         return self.__error
+    
+    @property
+    def id(self):
+        return self.__id
