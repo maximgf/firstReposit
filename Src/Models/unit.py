@@ -1,5 +1,5 @@
 from Src.Models.abstract_references import abstract_referance
-
+import datetime
 
 class unit_model(abstract_referance):
     '''
@@ -58,7 +58,6 @@ class unit_model(abstract_referance):
         if base: self.__base = base
         self.__coef = coef
 
-
     @property
     def to_base(self):
         return unit_model(base=self.base.base, coef=self.base.coef, name=self.base.name)
@@ -72,3 +71,9 @@ class unit_model(abstract_referance):
     @property
     def coef(self):
         return self.__coef
+
+    def period(self):
+        return datetime.datetime.now()
+    
+    def __str__(self):
+        return self.name

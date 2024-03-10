@@ -51,8 +51,6 @@ class Settings:
     @property
     def correspondent_account(self):
         return self.__corr_account
-
-
     
     def correspondent_account(self, value: int):
         '''
@@ -60,25 +58,19 @@ class Settings:
         '''
         self.__corr_account = value
 
-
     @property
     def BIK(self):
         return self.__BIK
 
-
-    
     def BIK(self, value: int):
         '''
         БИК
         '''
         self.__BIK = value
 
-
     @property
     def type(self):
         return self.__type
-
-
     
     def type(self, value: str):
         '''
@@ -88,12 +80,16 @@ class Settings:
 
         self.__type = value.strip()
 
-
     @property
     def is_first_start(self):
         return self.__first_start
 
-
-    
     def is_first_start(self, value: bool):
         self.__first_start = value
+
+    @property
+    def report_format(self):
+        return self.__rep_format
+
+    def report_format(self, value: str):
+        self.__rep_format = value

@@ -1,74 +1,25 @@
-class error_proxy:
-
-    __error_message = ''
-    __error_source = ''
-    __is_error = ''
+from Src.error_proxy import error_proxy
+class exceptions(Exception):
+    __inner_error: error_proxy = error_proxy()
 
 
-    def __init__(self, error_message: str = '', error_source: str = ''):
-        self.error_source = error_source
-        self.error_message = error_message
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__inner_error.set_error(self)
 
 
     @property
-    def error_message(self):
-        '''
-            Текст ошибки
-        '''
-        return self.__error_message
+    def error(self):
+        return self.__inner_error
 
+class argument_exception(exceptions):
+    '''
+    Ошибка передачи аргументов. Несоответсвие типов. Несоответсвие условиям.
+    '''
+    pass
 
-    @error_message.setter
-    def error_message(self, value: str):
-        if not isinstance(value, str):
-            raise TypeError("error_message must be string!")
-
-        if not value.strip():
-            self.__is_error = False
-            return
-
-        self.__error_message = value.strip()
-        self.__is_error = True
-
-
-    @property
-    def error_source(self):
-        '''
-            Источник ошибки.
-        '''
-        return self.__error_source
-
-
-    @error_source.setter
-    def error_source(self, value: str):
-        if not isinstance(value, str):
-            raise TypeError("error_source must be string!")
-        if not value: return
-
-        self.__error_source = value
-        
-
-    @property
-    def is_error(self):
-        '''
-            Флаг. Есть ошибка.
-        '''
-        return self.__is_error
-
-
-    def set_error(self, exception: Exception):
-        '''
-            Сохранить ошибку.
-        '''
-        if not isinstance(exception, Exception):
-            self.error_message = "Некорректно переданы параметры."
-            self.error_source = 'set_error()'
-            return
-
-        if exception:
-            self.error_message = f'ОШИБКА! {str(exception)}'
-            self.error_source = f'ИСКЛЮЧЕНИЕ! {type(exception)}'
-            return
-
-        self.error_message = ''
+class operation_exception(exceptions):
+    '''
+    Ошибка выполнения определённой операции.
+    '''
+    pass

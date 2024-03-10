@@ -1,5 +1,5 @@
 from Models.nomen import nomen_model
-from Models.nomen_group import nomen_group_model
+from Models.nomen_grope import nomen_group_model
 from Models.organization import organization_model
 from Models.recipe import recipe_model, recipe_row_model
 from Models.unit import unit_model

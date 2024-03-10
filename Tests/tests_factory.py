@@ -2,7 +2,8 @@ from Models.unit import unit_model
 from Src.Models import *
 from Src.Logics.start_factory import start_factory
 from Src.settings_manager import settings_manager
-from Src.Storage.storage import storage
+from Storage.Storage import storage
+
 
 
 class test_factory():
@@ -32,3 +33,4 @@ class test_factory():
         assert storage.nomenculature_key in factory.storage.data
         assert storage.group_key in factory.storage.data
         assert storage.unit_key in factory.storage.data
+        assert storage.recipe_key() in factory.storage.data

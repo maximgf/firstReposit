@@ -1,4 +1,6 @@
-from Src.Models import abstract_referance, nomen_group_model, unit_model
+from abstract_references import abstract_referance
+from Models.nomen_grope import nomen_group_model
+from Models.unit import unit_model
 
 
 class nomen_model(abstract_referance):
