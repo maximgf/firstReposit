@@ -1,6 +1,8 @@
 import uuid
 from abc import ABC
-from Src.error_proxy import error_proxy
+from error_proxy import error_proxy
+
+
 
 
 class abstract_referance(ABC):

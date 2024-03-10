@@ -1,7 +1,6 @@
-from Models.nomen import nomen_model
+from nomen import nomen_model
 from Models.unit import unit_model
 from Src.Models.abstract_references import abstract_referance
-from Src.Models import *
 
 class recipe_row_model(abstract_referance):
     __nomenculatures: nomen_model = None
@@ -46,3 +45,7 @@ class recipe_model(abstract_referance):
 
     def description(self, value: str):
         self.__description = value
+    
+    def rows(self):
+        return self.__rows
+    
