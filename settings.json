@@ -5,5 +5,7 @@
     "CHET": 92342390402,
     "CORESP": 23409875720,
     "NAMEE": "NAMEINGS",
-    "WID_SOB": "OOOOO"
+    "WID_SOB": "OOOOO",
+    "is_first_start": true,
+    "report_format": "json"
 }
