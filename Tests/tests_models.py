@@ -2,11 +2,12 @@ from Models.nomen import nomen_model
 from Models.nomen_grope import nomen_group_model
 from Models.organization import organization_model
 from Models.recipe import recipe_model, recipe_row_model
+from Models.storage_models import storage_model
+from Models.storage_transaction_model import storage_transaction_model
 from Models.unit import unit_model
 from Src.settings_manager import settings_manager
 from Src.Models import *
-
-
+from datetime import datetime
 class test_models():
 
     def test_unit(self):
@@ -83,3 +84,23 @@ class test_models():
                 size=5
                 )],)
         assert bool(recept) == True
+
+    def test_storage(self):
+        storage = storage_model(name='Главный склад', adress='ул. Пушкина, д. Колотушкина, 23')
+
+        assert storage is not None
+        assert storage.name == 'Главный склад'
+        assert len(storage.getattrs()) > 0 
+
+    def test_storage_transaction(self):
+        storage = storage_model(name='Главный склад', adress='ул. Пушкина, д. Колотушкина, 23')
+        nomen = nomen_model(name='Яйца', group=nomen_group_model.create_group(), units=unit_model.create_count())
+        counts = 300
+        operations = True
+        period = datetime.now()
+        unit = unit_model.create_count()
+
+        transaction = storage_transaction_model(storage=storage, nomen=nomen, operation=operations,
+                                                countes=counts, unit=unit, period=period)
+
+        assert transaction is not None
