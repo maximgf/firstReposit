@@ -1,8 +1,6 @@
 import uuid
 from abc import ABC
-from error_proxy import error_proxy
-
-
+from Src.error_proxy import error_proxy
 
 
 class abstract_referance(ABC):
@@ -11,25 +9,35 @@ class abstract_referance(ABC):
     __error: error_proxy = error_proxy()
 
 
-    def __init__(self, name: str = None):
+    def __init__(self, name: str = ''):
         self.name = name
-        self.__id = uuid.uuid4()
+        self.__id = str(uuid.uuid4())
+
 
     def __str__(self):
         return str(self.id)
 
-    @property
+
+    def __repr__(self):
+        return self.__str__()
+
+    
+    def __hash__(self) -> int:
+        return hash(self.name)
+
+
     def name(self):
         return self.__name.strip()
 
 
+    @name.setter
     def name(self, value: str):
         self.__name = value.strip()
 
+
     @property
-    def error(self):
+    def _error(self):
         return self.__error
-    
-    @property
+
     def id(self):
         return self.__id

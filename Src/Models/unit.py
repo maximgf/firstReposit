@@ -1,12 +1,12 @@
 from Src.Models.abstract_references import abstract_referance
 import datetime
 
+
 class unit_model(abstract_referance):
     '''
     Единица измерения, надо чтоб были уникальные по названию.
     '''
     __base = None
-    __num : int
     __coef: int
 
 
@@ -58,22 +58,28 @@ class unit_model(abstract_referance):
         if base: self.__base = base
         self.__coef = coef
 
+
+    def __str__(self):
+        return self.name
+
+
     @property
     def to_base(self):
-        return unit_model(base=self.base.base, coef=self.base.coef, name=self.base.name)
+        if self.base is None: return self
+        base = self.base
+        if base and base.base:
+            base =  base.base
+        return base
 
 
-    @property
+    def period(self):
+        return datetime.datetime.now()
+
+
+
     def base(self):
         return self.__base
 
 
-    @property
     def coef(self):
         return self.__coef
-
-    def period(self):
-        return datetime.datetime.now()
-    
-    def __str__(self):
-        return self.name

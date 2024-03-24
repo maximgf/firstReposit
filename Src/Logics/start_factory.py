@@ -1,6 +1,9 @@
+import datetime
 from Models.nomen import nomen_model
 from Models.nomen_grope import nomen_group_model
 from Models.recipe import recipe_model, recipe_row_model
+from Models.storage_models import storage_model
+from Models.storage_transaction_model import storage_transaction_model
 from Models.unit import unit_model
 from Src.Models import *
 from Src.settings import Settings
@@ -103,3 +106,68 @@ class start_factory:
                 unit=unit_model.create_gramm(),
                 size=5
                 )],)]
+    @staticmethod
+    def create_journal():
+        storage = storage_model(name='Главный склад', adress='ул. Пушкина, д. Колотушкина, 23')
+        storage2 = storage_model(name='Не главный склад', adress='ул. Не Пушкина, д. Не Колотушкина, не 23')
+
+        nomen_group = nomen_group_model.create_group()
+
+        unit = unit_model.create_count()
+        kilogram = unit_model.create_kilogramm()
+        gramm = unit_model.create_gramm()
+
+        nomen1 = nomen_model(name='Яйца', group=nomen_group, units=unit)
+        nomen2 = nomen_model(name='Сахар', group=nomen_group, units=kilogram)
+        nomen3 = nomen_model(name='Сливочное масло', group=nomen_group, units=gramm)
+
+        return [
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=True,
+                                                countes=200, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=False,
+                                                countes=50, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=False,
+                                                countes=100, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=True,
+                                                countes=200, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=True,
+                                                countes=50, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=False,
+                                                countes=150, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen3, operation=True,
+                                                countes=23000, unit=gramm, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen3, operation=False,
+                                                countes=23000, unit=gramm, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=True,
+                                                countes=200, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=False,
+                                                countes=50, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=False,
+                                                countes=100, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=True,
+                                                countes=200, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=True,
+                                                countes=50, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=False,
+                                                countes=150, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen3, operation=True,
+                                                countes=23000, unit=gramm, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen3, operation=False,
+                                                countes=23000, unit=gramm, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=True,
+                                                countes=200, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=False,
+                                                countes=50, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen1, operation=False,
+                                                countes=100, unit=unit, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=True,
+                                                countes=200, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=True,
+                                                countes=50, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen2, operation=False,
+                                                countes=150, unit=kilogram, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen3, operation=True,
+                                                countes=23000, unit=gramm, period=datetime.now()),
+            storage_transaction_model(storage=storage, nomen=nomen3, operation=False,
+                                                countes=23000, unit=gramm, period=datetime.now())
+        ]
