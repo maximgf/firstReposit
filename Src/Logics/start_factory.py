@@ -171,3 +171,8 @@ class start_factory:
             storage_transaction_model(storage=storage, nomen=nomen3, operation=False,
                                                 countes=23000, unit=gramm, period=datetime.now())
         ]
+    @staticmethod
+    def create_storages():
+        storage = storage_model(name='Main', adress='ул. Лермонтова, д. 144, 21')
+        storage2 = storage_model(name='Main2', adress='ул. Гоголя, д. 16, 14')
+        return [storage, storage2]
