@@ -34,7 +34,10 @@ class storage:
             Список номенкулатурных групп
         '''
         return 'group'
-
+    
+    @staticmethod
+    def storages_key():
+        return 'storages_key'
 
     @staticmethod
     def unit_key() -> str:

@@ -1,0 +1,89 @@
+from Models.abstract_references import abstract_referance
+from Models.nomen import nomen_model
+from Models.nomen_grope import nomen_group_model
+from Models.unit import unit_model
+from Src.Logics.storage_service import storage_service
+from Src.Logics.start_factory import start_factory
+from Src.settings_manager import settings_manager
+from Src.Storage.Storage import storage
+from datetime import datetime
+from Src.Models import *
+import unittest
+
+class period(abstract_referance):
+    __start: datetime
+    __end: datetime
+
+    def __init__(self, start: datetime, end: datetime, *args, **kwargs):
+        self.__start: datetime = start
+        self.__end: datetime = end
+        super().__init__(*args, **kwargs)
+
+
+    @property
+    def start(self) -> datetime:
+        return self.__start
+
+    @property
+    def end(self) -> datetime:
+        return self.__end
+
+class test_models(unittest.TestCase):
+
+    def test_period_turns(self):
+        options = settings_manager()
+        start = start_factory(options.settings)
+        start.create()
+
+        start_date = datetime.strptime('2023-01-01', '%Y-%m-%d')
+        stop_date = datetime.strptime('2024-10-01', '%Y-%m-%d')
+
+        service = storage_service(start.storage.data[storage.journal_key()])
+        result = service.create_turns(period(start=start_date, end=stop_date))
+
+        assert result is not None
+        assert len(result) != 0
+
+
+    def test_nomen_turns(self):
+        options = settings_manager()
+        start = start_factory(options.settings)
+        start.create()
+
+        nomen = nomen_model(name='Сахар', group=nomen_group_model.create_group(), units=unit_model.create_gramm())
+
+        service = storage_service(start.storage.data[storage.journal_key()])
+        result = service.create_turns( nomen )
+
+        assert result is not None
+        assert len(result) != 0
+
+
+    def test_recipe_turns(self):
+        options = settings_manager()
+        start = start_factory(options.settings)
+        start.create()
+
+        recipe = start.storage.data[storage.recipe_key()][0]
+        storage_ = start.storage.data[storage.storages_key()][0]
+
+        service = storage_service(start.storage.data[storage.journal_key()])
+        result = service.create_turns( recipe , storage=storage_)
+
+        assert result is not None
+        assert len(result) != 0
+
+
+    def test_recipe_devits(self):
+        options = settings_manager()
+        start = start_factory(options.settings)
+        start.create()
+
+        recipe = start.storage.data[storage.recipe_key()][0]
+        storage_ = start.storage.data[storage.storages_key()][0]
+
+        service = storage_service(start.storage.data[storage.journal_key()])
+        result = service.create_debits( recipe , storage_)
+
+        assert result is not None
+        assert len(result) != 0
